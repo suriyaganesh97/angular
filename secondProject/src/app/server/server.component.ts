@@ -7,5 +7,5 @@ import { Component } from "@angular/core";
 
 export class ServerComponent
 {
-
+    name1 = "name testing variable";
 }

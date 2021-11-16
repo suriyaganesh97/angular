@@ -1,5 +1,14 @@
 <!-- <p class="btn btn-success">success </p> -->
-<p class="btn btn-success">success </p><br>
-the number is {{ num1 }}
+<button class="btn btn-success" (click)="whenClicked()">success </button><br>
+<h1>the server status is {{ text1 }}</h1>
 <br>
-<img src="../../assets/iphone6.png" alt="image not found">
+<!-- <input (input)="updateServerName($event)"> -->
+<input type="text" [(ngModel)]="newServer">
+{{ newServer }}
+<br>
+the number is {{ serverName }}
+<br>
+
+<br>
+<!-- <img [src]=img_src alt="image not found"> -->
+<br>

@@ -1,3 +1,4 @@
+
 <input type="text" [(ngModel)]="username">
 <p>{{username}}</p>
-<button type="button" [disabled]="!validString">Click Me!</button>
+<button [disabled]="username===''" (click)="resetbutton($event)">reset user</button>

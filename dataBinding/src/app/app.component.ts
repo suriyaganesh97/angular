@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'dataBinding';
   username="";
-  usernamelen = this.username.length;
-  validString=false;
-  
-
+  resetbutton(event: Event)
+  {
+    this.username="";
+  }
   
 }

@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'directives';
-  server=true;
+  server1=false;
+  server2=true;
+  isValid=true;
+  unchanged=false;
+  isredColor=false;
+  step1='present';
 }

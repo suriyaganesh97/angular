@@ -1,1 +1,22 @@
-testing app is {{server}}
+<body>
+    
+
+testing app is {{server1}}
+<br>
+<button class="btn btn-primary" [disabled]="unchanged">primary</button>
+<p *ngIf="server1">server is false,text wont show</p>
+<p *ngIf="server2">server is true,text will show</p>
+<div *ngIf="isValid;else other_content">
+    content here ...
+</div>
+
+<ng-template #other_content>other content here...</ng-template>
+
+<div [ngStyle]="isredColor?{'background-color':'red'}:{'background-color':'blue'}">coloured data</div>
+
+<br>
+<div [ngClass]="{'recolour':step1=='present'}">class testing exmaple</div>
+<br>
+<br>
+<br>
+</body>

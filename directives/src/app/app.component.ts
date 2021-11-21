@@ -13,4 +13,13 @@ export class AppComponent {
   unchanged=false;
   isredColor=false;
   step1='present';
+  num1: any = 20;
+  num2: any = 30;
+  num3: any = 0;
+  if (num1 > num2) {
+    num3=num1;
+  }
+  else{
+    num3=num2;
+  }
 }

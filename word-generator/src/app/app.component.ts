@@ -8,4 +8,5 @@ import Arraywords from "../utils/words"
 export class AppComponent {
   title = 'word-generator';
   words = Arraywords;
+  new_word="";
 }

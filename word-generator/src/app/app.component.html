@@ -1,8 +1,27 @@
-<!-- <input type="number" [(ngModel)]="new_number">
+
+<div class="container">
 <br>
-<h1>{{new_number}} </h1> -->
 <br>
+<h1>{{limit}}</h1>
 <br>
-<button type="button" class="btn btn-primary">Generate words</button>
-<!-- <button type="button" class="btn btn-primary" (click)=When_clicked(new_number)>Generate words</button> -->
-<!-- <h1>the words are {{ words }}</h1> -->
+<input 
+type="range"
+min=0
+max=20
+value ={{limit}}
+ (change)="slide_func($any($event.target).value)"   
+/> 
+<!--not clear revisit later as why any event target -->
+<br>
+<button type="button" class="btn btn-primary" (click)="generate()">Generate words</button>
+<br>
+    <div *ngIf="words" class="card card-body">
+        {{words}}
+    </div>
+    <br>
+<button type="button" class="btn btn-primary" (click)="generate_country()">Generate random country</button>
+<div *ngIf="random_country" class="card card-body">
+    {{random_country}}
+</div>
+</div>
+

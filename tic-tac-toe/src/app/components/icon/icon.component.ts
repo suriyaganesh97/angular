@@ -7,7 +7,7 @@ import {faCircle} from "@fortawesome/free-regular-svg-icons"
   styleUrls: ['./icon.component.css']
 })
 export class IconComponent implements OnInit {
-  //@Input() iconName:string;
+  @Input() iconName:string;
   faPen = faPen;
   faTimes = faTimes;
   faCircle = faCircle;

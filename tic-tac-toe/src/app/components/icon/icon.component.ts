@@ -11,6 +11,7 @@ export class IconComponent implements OnInit {
   faPen = faPen;
   faTimes = faTimes;
   faCircle = faCircle;
+  // test1=3;
   constructor() { }
 
   ngOnInit(): void {

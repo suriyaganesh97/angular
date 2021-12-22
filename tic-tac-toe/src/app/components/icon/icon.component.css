@@ -1,6 +1,9 @@
 .icon {
     font-size: 35px;
-    color: #000000;
+    color: hsla(0, 43%, 99%, 0.822);
     font-weight: bolder;
   }
-  
+h1
+{
+  color: white;
+}

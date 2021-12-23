@@ -1,8 +1,15 @@
-<h1>icon works!
-</h1>
-<fa-icon [icon]="faPen" class="icon"></fa-icon>
-<br>
-<fa-icon [icon]="faCircle" class="icon"></fa-icon>
-<br>
-<fa-icon [icon]="faTimes" class="icon"></fa-icon>
-<br>
+
+<div *ngSwitch="iconName">
+    <div *ngSwitchCase="'empty'">
+        <fa-icon [icon]="faPen" class="icon"></fa-icon>
+    </div>
+    <div *ngSwitchCase="'cross'">
+        <fa-icon [icon]="faTimes" class="icon"></fa-icon>
+    </div>
+    <div *ngSwitchCase="'circle'">
+        <fa-icon [icon]="faCircle" class="icon"></fa-icon>
+    </div>
+    <div *ngSwitchDefault>
+        <h1>something is not right</h1>
+    </div>
+</div>

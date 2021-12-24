@@ -1,5 +1,5 @@
 
-<div *ngSwitch="iconName">
+<div [ngSwitch]="iconName">
     <div *ngSwitchCase="'empty'">
         <fa-icon [icon]="faPen" class="icon"></fa-icon>
     </div>

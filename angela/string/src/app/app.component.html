@@ -1,0 +1,15 @@
+<br>
+<br>
+<div class="container text-center">
+first name: <input type="text" [(ngModel)]="fName">
+<br>
+last name: <input type="text" [(ngModel)]="lName">
+<br>
+<br>
+<button class="btn btn-primary" (click)="combineName()">submit button</button>
+<br>
+<br>
+ <div *ngIf="nameInput">  <!--if true only below statement will be executed -->
+hello {{fullName}}, welcome to the app!!
+</div>
+</div>

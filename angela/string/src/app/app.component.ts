@@ -12,7 +12,7 @@ export class AppComponent {
   fullName="";
   nameInput=false;
   combineName(){
-    this.fullName = this.fName+this.lName;
+    this.fullName = this.fName.toUpperCase()+this.lName.toUpperCase();
     if (this.fullName.length>0)  //checking whether name is entered 
     {
       this.nameInput=true;

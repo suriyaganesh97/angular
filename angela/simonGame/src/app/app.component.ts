@@ -18,7 +18,8 @@ export class AppComponent {
     this.randomNumber = this.min_limit + Math.floor(Math.random()*(this.max_limit-this.min_limit+1));
     this.randomChosenColour = this.buttonColours[this.randomNumber];
     this.gamePattern.push(this.randomChosenColour);
-    this.gamePattern.push(Object.assign({}, this.randomChosenColour));
+    console.log(this.gamePattern);
+    // this.gamePattern.push(Object.assign({}, this.randomChosenColour));
     
   }
 }

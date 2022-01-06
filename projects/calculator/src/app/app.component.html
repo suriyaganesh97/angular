@@ -2,12 +2,13 @@
   <div class = title >Calculator</div>
   <table border="2">
   <tr>
-  <td><input type="button" value="c" class="btn btn-primary" onclick="clr()"/> </td>
-  <td colspan="3"><input type="text" id="textval"/></td>
+  <td><input type="button" value="c" class="btn btn-primary" (click)="clr()" /> </td>
+  <td colspan="3"><input type="number" id="textval" [(ngModel)]="num1"/> 
+  </td>
   </tr>
   <tr>
   <td><input type="button" value="+" class="btn btn-primary" onclick="display('+')"/> </td>
-  <td><input type="button" value="1" class="btn btn-primary" onclick="display('1')"/> </td>
+  <td><input type="button" [(ngModel)]="num1" class="btn btn-primary" onclick="display('1')"/> </td>
   <td><input type="button" value="2" class="btn btn-primary" onclick="display('2')"/> </td>
   <td><input type="button" value="3" class="btn btn-primary" onclick="display('3')"/> </td>
   </tr>

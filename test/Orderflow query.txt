@@ -1,0 +1,37 @@
+--Fraud_Hold:
+ 
+select min(oh.order_no),min(oht.hold_type) hold_type, min(to_char(oh.order_date - 8/24, 'MM/DD/YYYY hh24:mm:Ss')) order_date_in_PST,pi.First_Name, pi.Last_Name, oh.Customer_Emailid,min(trim(pi.address_line1))||'  '|| min(trim(pi.address_line2))||'   '||min(trim(pi.city))||',  '|| min(trim(pi.state))||' '|| min(trim(pi.zip_code)) address,
+min(oh.customer_phone_no) phone, c.description Status, min(ol.EXTN_CE_NUMBER) CE_number from ssfs_admin.yfs_order_line ol, ssfs_admin.YFS_ORDER_HEADER oh,
+SSFS_ADMIN.yfs_person_info pi, ssfs_admin.yfs_order_release_status ors,  ssfs_admin.yfs_order_hold_type oht, yfs_status c where ol.order_header_key=oh.order_header_key and oh.ship_to_key = pi.person_info_key and ors.STATUS_QUANTITY>0 AND c.status =  (SELECT MAX(d.status)   FROM yfs_order_release_status d   WHERE d.order_header_key = oh.order_header_key) AND c.process_type_key = 'ORDER_FULFILLMENT' and oht.order_header_key = oh.order_header_key  and ors.order_header_key = oh.order_header_key  
+and oh.createts > sysdate-18 and ors.order_line_key = ol.order_line_key and 
+ors.order_header_key = oh.order_header_key and ol.order_header_key = oht.order_header_key and oht.status='1100' 
+and c.description in('Created','Released','Scheduled') and oht.hold_type in ('FRAUD_CHECK')  group by  oh.order_no, oh.order_date, pi.address_line1,pi.address_line2,pi.city,pi.state,pi.zip_code, 
+oht.hold_type, oh.customer_phone_no, c.description,ol.EXTN_CE_NUMBER,pi.First_Name, pi.Last_Name, oh.Customer_Emailid order by oh.order_date
+ 
+ 
+--Charge Failure:
+ 
+select min(oh.order_no),min(oht.hold_type) hold_type, min(to_char(oh.order_date - 8/24, 'MM/DD/YYYY hh24:mm:Ss')) order_date_in_PST,pi.First_Name, pi.Last_Name, oh.Customer_Emailid,min(trim(pi.address_line1))||'  '|| min(trim(pi.address_line2))||'   '||min(trim(pi.city))||',  '|| min(trim(pi.state))||' '|| min(trim(pi.zip_code)) address,
+min(oh.customer_phone_no) phone, c.description Status, min(ol.EXTN_CE_NUMBER) CE_number from ssfs_admin.yfs_order_line ol, ssfs_admin.YFS_ORDER_HEADER oh,
+SSFS_ADMIN.yfs_person_info pi, ssfs_admin.yfs_order_release_status ors,  ssfs_admin.yfs_order_hold_type oht, yfs_status c where 
+ol.order_header_key=oh.order_header_key and oh.ship_to_key = pi.person_info_key and ors.STATUS_QUANTITY>0 AND 
+c.status =  (SELECT MAX(d.status)   FROM yfs_order_release_status d   WHERE d.order_header_key = oh.order_header_key) AND 
+c.process_type_key = 'ORDER_FULFILLMENT' and oht.order_header_key = oh.order_header_key  and ors.order_header_key = oh.order_header_key  
+and oh.createts > sysdate-18 and ors.order_line_key = ol.order_line_key and 
+ors.order_header_key = oh.order_header_key and ol.order_header_key = oht.order_header_key and oht.status='1100' and
+oht.hold_type in ('CHARGE_FAILURE')  group by  oh.order_no, oh.order_date, pi.address_line1,pi.address_line2,pi.city,pi.state,pi.zip_code, 
+oht.hold_type, oh.customer_phone_no, c.description,ol.EXTN_CE_NUMBER,pi.First_Name, pi.Last_Name, oh.Customer_Emailid order by oh.order_date
+
+--Back order hold orders:
+ 
+select min(oh.order_no),min(oht.hold_type) hold_type, min(to_char(oh.order_date - 7/24, 'MM/DD/YYYY hh24:mm:Ss')) order_date_in_PST,pi.First_Name, pi.Last_Name, oh.Customer_Emailid,min(trim(pi.address_line1))||'  '|| min(trim(pi.address_line2))||'   '||min(trim(pi.city))||',  '|| min(trim(pi.state))||' '|| min(trim(pi.zip_code)) address, min(oh.customer_phone_no) phone, 
+c.description Status, min(ol.EXTN_CE_NUMBER) CE_number from ssfs_admin.yfs_order_line ol, ssfs_admin.YFS_ORDER_HEADER oh,
+SSFS_ADMIN.yfs_person_info pi, ssfs_admin.yfs_order_release_status ors,  ssfs_admin.yfs_order_hold_type oht, yfs_status c where 
+ol.order_header_key=oh.order_header_key and oh.ship_to_key = pi.person_info_key and ors.STATUS_QUANTITY>0 AND ors.status<>'3700.100' and
+c.status =  (SELECT MAX(d.status)   FROM yfs_order_release_status d   WHERE d.order_header_key = oh.order_header_key) AND 
+c.process_type_key = 'ORDER_FULFILLMENT' and oht.order_header_key = oh.order_header_key  and ors.order_header_key = oh.order_header_key  
+and oh.createts > sysdate-18 and ors.order_line_key = ol.order_line_key and 
+ors.order_header_key = oh.order_header_key and ol.order_header_key = oht.order_header_key 
+and c.description in('Created','Released','Scheduled','Backordered') 
+and oht.hold_type='Back_Order_Hold'  group by  oh.order_no, oh.order_date, pi.address_line1,pi.address_line2,pi.city,pi.state,pi.zip_code, 
+oht.hold_type, oh.customer_phone_no, c.description,ol.EXTN_CE_NUMBER,pi.First_Name, pi.Last_Name, oh.Customer_Emailid order by oh.order_date

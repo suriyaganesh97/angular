@@ -1,0 +1,147 @@
+--BUNDLES:
+
+select * from (
+select partnumber, name,  buyable, published,catenttype_id, field2 as store_sale_startdate, field3 as store_sale_enddate, setA.US_STORE_ELIGIBLESKU, setA.US_Store_NON_GS_SKU, setA.product_class, setA.pm_category,  setB.* from (
+select * from (
+select ce.partnumber, ced.name, ce.buyable,  ced.published, catde.field2,catde.field3,cattr.catentry_id,ce.catenttype_id,a.identifier,avd.value from (select * from catentryattr where catentry_id in (select catentry_id from catentry where catenttype_id  in ('BundleBean','PackageBean','DynamicKitBean'))
+) cattr, attr a, attrvaldesc avd, catentry ce, catentdesc ced, catentdescovr catde
+where ce.catentry_id   =cattr.catentry_id 
+AND ce.catentry_id   =ced.catentry_id 
+and catde.catentry_id = ce.catentry_id
+and cattr.attr_id=a.attr_id
+and cattr.attrval_id=avd.attrval_id
+and avd.language_id=-1
+and a.identifier in ('US_Store_EligibleSKU','pm_category','US_Store_NON_GS_SKU','product_class')
+)
+pivot(max(value) for identifier in ('US_Store_EligibleSKU' as US_Store_EligibleSKU,'US_Store_NON_GS_SKU' as US_Store_NON_GS_SKU, 'product_class' as product_class, 'pm_category' as pm_category))
+) SetA,
+(
+select * from (
+select cattr.catentry_id,avd.value from catentryattr cattr, attrvaldesc avd
+where cattr.attrval_id=avd.attrval_id
+and avd.language_id=-1
+and cattr.attr_id=7741124012283624344
+and cattr.catentry_id in (select catentry_id from catentry where catenttype_id  in ('BundleBean','PackageBean','DynamicKitBean'))
+)
+pivot(max(value) for value in ('epp' as epp,'hpepp' as hpepp, 'bizclubsilver' as bizclubsilver,'bizclubsilverb' as bizclubsilverb,'bizclubgold' as bizclubgold,'bizclubplatinum' as bizclubplatinum, 'fedex' as fedex,'ups' as ups,'contenttest' as contenttest,'bioprint' as bioprint,'digdispensefed' as digdispensefed,'hp3dscan' as hp3dscan,'kaiser' as kaiser,'techsoup' as techsoup,'sterlingcc' as SterlingCC,'intuit' as Intuit,'dscoop' as Dscoop,'occulus' as Occulus,'1800members' as I800_Members,'stepupforstudents' as Step_Up_For_Students,'avbinc' as AVB_Inc,'liftforwarddaas' as LiftForward_DAAS)) 
+) SetB where SetA.catentry_id=setB.Catentry_id(+)
+)
+
+
+
+--STO:
+
+
+select * from (
+select  setA.partnumber, setA.name, setA.buyable, setA.published, setA.product_class, setA.store_sale_startdate, setA.store_sale_enddate, setA.US_Store_EligibleSKU, setA.US_Store_NON_GS_SKU, setA.pm_producttype, setA.pm_category, setA.etz_h1_name,setB.* from (
+select distinct * from (select partnumber,catentry_id,name,buyable,published,store_sale_startdate,store_sale_enddate,US_Store_EligibleSKU,US_Store_NON_GS_SKU,product_class,pm_producttype,pm_category,etz_h1_name
+FROM (select * from (         
+SELECT ca.catentry_id,ca.partnumber,ca.catenttype_id,cd.name,ca.buyable,cd.published,a.identifier,avd.value
+,cger.catalog_id,ia.availquantity,ia.inventorystatus,XPATH.XPATH
+,catdesco.field2 as store_sale_startdate,
+catdesco.field3 as store_sale_enddate      
+FROM catentry ca,         
+  catentdesc cd,         
+  storelang sl,         
+  attr a,         
+  catentryattr cattr,
+  catentdescovr catdesco,
+  attrvaldesc avd,         
+  invavl ia,        
+  catgpenrel cger,       
+  (       
+  select Catgroup_Id,XPath_Catgroup_Name| |' : '| |Catgroup_Name AS XPATH from (        
+Select xRef.catgroup_id_child AS Catgroup_Id, cgdChild.name Catgroup_Name,          
+connect_by_root(cgdParent.name) ROOTNODES,         
+connect_by_root(cgParent.identifier) ROOTID,         
+SYS_CONNECT_BY_PATH(cgdParent.name, ' : ') XPath_Catgroup_Name         
+From catgrprel xRef, catgroup cgChild, catgroup cgParent, catalog c,          
+(Select * From catgrpdesc Where language_id = -1) cgdParent,          
+(Select * From catgrpdesc Where language_id = -1) cgdChild          
+Where c.catalog_id = xRef.catalog_id           
+And c.catalog_id = 10051          
+AND cgChild.MARKFORDELETE =0         
+AND cgParent.MARKFORDELETE =0         
+And cgChild.catgroup_id = xRef.catgroup_id_child          
+And cgParent.catgroup_id = xRef.catgroup_id_parent          
+And cgdChild.catgroup_id = cgChild.catgroup_id          
+And cgdParent.catgroup_id = cgParent.catgroup_id          
+Connect By prior xRef.catgroup_id_child = xRef.catgroup_id_parent         
+)    
+   
+)XPATH       
+WHERE ca.catentry_id=cd.catentry_id         
+AND cd.language_id   =sl.language_id         
+AND ca.catentry_id  =cattr.catentry_id         
+AND cattr.attr_id =a.attr_id         
+AND cattr.attrval_id =avd.attrval_id         
+AND sl.storeent_id      =10151        
+AND ca.catentry_id=ia.catentry_id(+)   
+and  catdesco.catentry_id=ca.catentry_id
+AND ca.catentry_id=cger.catentry_id(+)        
+AND cger.catgroup_id=XPATH.catgroup_id       
+AND a.identifier in ('product_class','US_Store_EligibleSKU','US_Store_NON_GS_SKU','pm_producttype','pm_category','etz_h1_name')    
+AND ca.catenttype_id in ('ItemBean')      
+)         
+pivot         
+(         
+MAX(value) for identifier in ( 
+'pm_category' as pm_category,
+'etz_h1_name' as etz_h1_name,
+'pm_producttype' as pm_producttype,
+'product_class' as product_class,
+'US_Store_EligibleSKU' as US_Store_EligibleSKU,    
+'US_Store_NON_GS_SKU' as US_Store_NON_GS_SKU   
+)         
+)        
+pivot       
+(       
+MAX(catalog_id) for catalog_id in ('10001' as Master,'10051' as Sales)         
+) where sales is not null     
+    
+) )     
+)SetA,
+(
+select * from (
+select cattr.catentry_id,avd.value from catentryattr cattr, attrvaldesc avd
+where cattr.attrval_id=avd.attrval_id
+and avd.language_id=-1
+and cattr.attr_id=7741124012283624344
+--and cattr.catentry_id in (select catentry_id from catentryattr where attr_id =7000000000000044001)
+)
+pivot(max(value) for value in ('epp' as epp,'hpepp' as hpepp, 'bizclubsilver' as bizclubsilver,'bizclubsilverb' as bizclubsilverb,'bizclubgold' as bizclubgold,'bizclubplatinum' as bizclubplatinum, 'fedex' as fedex,'ups' as ups,'contenttest' as contenttest,'bioprint' as bioprint,'digdispensefed' as digdispensefed,'hp3dscan' as hp3dscan,'kaiser' as kaiser,'techsoup' as techsoup,'sterlingcc' as SterlingCC,'intuit' as Intuit,'dscoop' as Dscoop,'occulus' as Occulus,'1800members' as I800_Members,'stepupforstudents' as Step_Up_For_Students,'avbinc' as AVB_Inc,'liftforwarddaas' as LiftForward_DAAS)) 
+) SetB where SetA.catentry_id=setB.catentry_id(+)
+);
+
+
+--CTO_COMP:
+
+select * from (
+select partnumber, buyable, published, setA.US_STORE_ELIGIBLESKU,setA.US_Store_NON_GS_SKU,setA.CTO_COMPONENT_TYPE,setA.product_class,  setB.* from (
+select * from (
+select ce.partnumber, ce.buyable, ced.published, cattr.catentry_id,a.identifier,avd.value from (select * from catentryattr where catentry_id in (select catentry_id from catentryattr where attr_id in (7000000000000044001,7000000000000022501))
+) cattr, attr a, attrvaldesc avd, catentry ce, catentdesc ced 
+where ce.catentry_id   =cattr.catentry_id 
+AND ce.CATENTTYPE_ID ='ItemBean' 
+AND ce.catentry_id   =ced.catentry_id 
+and cattr.attr_id=a.attr_id
+and cattr.attrval_id=avd.attrval_id
+and avd.language_id=-1
+and a.identifier in ('US_Store_EligibleSKU','US_Store_NON_GS_SKU','CTO Component Type','product_class')
+)
+pivot(max(value) for identifier in ('US_Store_EligibleSKU' as US_Store_EligibleSKU,'US_Store_NON_GS_SKU' as US_Store_NON_GS_SKU,'CTO Component Type' as CTO_COMPONENT_TYPE,'product_class' as product_class))
+) SetA,
+(
+select * from (
+select cattr.catentry_id,avd.value from catentryattr cattr, attrvaldesc avd
+where cattr.attrval_id=avd.attrval_id
+and avd.language_id=-1
+and cattr.attr_id=7741124012283624344
+)
+pivot(max(value) for value in ('epp' as epp,'hpepp' as hpepp, 'bizclubsilver' as bizclubsilver,'bizclubsilverb' as bizclubsilverb,'bizclubgold' as bizclubgold,'bizclubplatinum' as bizclubplatinum, 'fedex' as fedex,'ups' as ups,'contenttest' as contenttest,'bioprint' as bioprint,'digdispensefed' as digdispensefed,'hp3dscan' as hp3dscan,'kaiser' as kaiser,'techsoup' as techsoup,'sterlingcc' as SterlingCC,'intuit' as Intuit,'dscoop' as Dscoop,'occulus' as Occulus,'1800members' as I800_Members,'stepupforstudents' as Step_Up_For_Students,'avbinc' as AVB_Inc,'liftforwarddaas' as LiftForward_DAAS)) 
+) SetB where SetA.catentry_id=setB.Catentry_id(+)
+);
+
+select * from attrvaldesc where value = 'avbinc';
+stepupforstudents
+avbinc

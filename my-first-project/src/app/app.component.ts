@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-first-project';
+  num1=5;
+  src_path="../../assets/quote.JPG"
+  name1="";
 }

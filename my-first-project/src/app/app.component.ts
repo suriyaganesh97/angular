@@ -10,4 +10,6 @@ export class AppComponent {
   num1=5;
   src_path="../../assets/quote.JPG"
   name1="";
+  state1=true;
+  state2=false;
 }

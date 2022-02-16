@@ -1,1 +1,17 @@
 <p>recipe-list works!</p>
+<li *ngFor="let item of recipes">
+   <h4>the name of the recipe is {{item['name']}}</h4> 
+   <h4>
+        the description of recipe is {{item['description']}}
+   </h4>
+   <!-- <h4>
+    the description of recipe is {{item.description}}
+</h4> -->
+   <br>
+   <h4>image is</h4>  
+   <br>
+   <img src="{{ item.imagePath }}" alt="not working" srcset="" width="50" height="50">
+   <!-- <br>
+   same image repeat is
+   <img [src]="item.imagePath" alt="not working" srcset="" width="500" height="500"> -->
+</li>

@@ -7,7 +7,14 @@
 <input type="number" [(ngModel)]="num2">
 <br>
 <br>
-<button class="btn btn-primary" (click)="addnum()">add</button>
+<button class="btn btn-primary btn-spacing" (click)="addnum()">add</button>
+<button class="btn btn-primary btn-spacing" (click)="subnum()">subtract</button>
+<button class="btn btn-primary btn-spacing" (click)="mulnum()">multiply</button>
+<button class="btn btn-primary btn-spacing" (click)="divnum()">divide</button>
 <br>
-the solution is {{ num3 }}
+<br>
+<p *ngIf="displayResult">
+    The {{ operation }} of {{ num1 }} and  {{ num2 }} is {{ num3 }}
+</p>
+
 </div>

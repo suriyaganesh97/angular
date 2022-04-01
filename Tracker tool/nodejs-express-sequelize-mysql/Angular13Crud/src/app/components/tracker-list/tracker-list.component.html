@@ -1,0 +1,52 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by Name"
+          [(ngModel)]="username"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-primary search-button"
+            type="button"
+            (click)="searchTitle()"
+          >
+            Search
+          </button>
+        </div>
+        <div class="input-group-append">
+          <button
+            class="btn btn-primary cancel-button"
+            type="button"
+            (click)="cancelTitle()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Trackers List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let tracker of trackers; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveTracker(tracker, i)"
+        >
+          {{ tracker.username }}
+        </li>
+      </ul>
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTrackers()">
+        Remove All
+      </button>
+    </div>
+    <div class="col-md-6">
+      <app-tracker-details
+        [viewMode]="true"
+        [currentTracker]="currentTracker"
+      ></app-tracker-details>
+    </div>
+  </div>

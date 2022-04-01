@@ -1,0 +1,14 @@
+.list {
+    text-align: left;
+    max-width: 750px;
+    margin: auto;
+  }
+.search-button{
+  left: 20px;
+  right: 20px;
+}
+.cancel-button
+{
+  left: 40px;
+  right: 20px;
+}

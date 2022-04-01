@@ -1,0 +1,94 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentTracker.id">
+      <h4>Tracker</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentTracker.username }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentTracker.userdescription }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentTracker.userpublished ? "Completed" : "Pending" }}
+      </div>
+      <!-- <div>
+        <label><strong>Created At:</strong></label>
+        {{ currentTracker.createdAt }}
+      </div>
+      <div>
+        <label><strong>Update At:</strong></label>
+        {{ currentTracker.upatedAt  }}
+      </div> -->
+      <a
+        class="badge badge-warning"
+        routerLink="/trackers/{{ currentTracker.id }}"
+      >
+        Edit
+      </a>
+    </div>
+    <div *ngIf="!currentTracker">
+      <br />
+      <p>Please click on a Tracker...</p>
+    </div>
+  </div>
+  <ng-template #editable>
+    <div *ngIf="currentTracker.id" class="edit-form">
+      <h4>Tracker</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentTracker.username"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="currentTracker.userdescription"
+            name="description"
+          />
+        </div>
+        <div class="form-group">
+          <label><strong>Status:</strong></label>
+          {{ currentTracker.userpublished ? "Completed" : "Pending" }}
+        </div>
+      </form>
+      <button
+        class="badge badge-primary mr-2"
+        *ngIf="currentTracker.userpublished"
+        (click)="updatePublished(false)"
+      >
+        Not Completed
+      </button>
+      <button
+        *ngIf="!currentTracker.userpublished"
+        class="badge badge-primary mr-2"
+        (click)="updatePublished(true)"
+      >
+        Completed
+      </button>
+      <button class="badge badge-danger mr-2" (click)="deleteTracker()">
+        Delete
+      </button>
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateTracker()"
+      >
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+    <div *ngIf="!currentTracker.id">
+      <br />
+      <p>Cannot access this Tracker...</p>
+    </div>
+  </ng-template>

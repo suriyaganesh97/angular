@@ -7,7 +7,14 @@ import { NewComponent } from './new/new.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  currentMsgToChild1 ="suriya";
+  messagelist = [{  
+    id: 1,  
+    msg: 'Test two notification'  
+}, {  
+    id: 2,  
+    msg: 'Test three notification'  
+}, ];  
+new_title = "suriya";
   constructor() {
     testComponent: TestComponent
 

@@ -12,3 +12,23 @@
   left: 40px;
   right: 20px;
 }
+.search-align
+{
+  height: 50px;
+    width: 700px;
+    padding-top: 40px;
+}
+
+.tracker-list-text{
+  margin-left: 80px;
+  padding-top: 10px;
+  
+}
+.pagination-control-list{
+  margin-top: 40px;
+}
+
+  .container-fluid{
+    border-top-width: 40px;
+  /* background-image: url("../../../assets/bryce_canyon_sunrise.jpg");  */
+ }  

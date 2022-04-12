@@ -1,4 +1,6 @@
+<div class="container-fluid">
 <div class="list row">
+  <div class="search-align">
     <div class="col-md-8">
       <div class="input-group mb-3">
         <input
@@ -27,20 +29,37 @@
         </div>
       </div>
     </div>
+  </div>
+  
+  
+  <div class="col-md-8 pagination-control-list">
+    <pagination-controls 
+  previousLabel="Prev"
+  nextLabel="Next"
+  (pageChange)="handlePageChange($event)"
+  ></pagination-controls>
+  </div>
     <div class="col-md-6">
-      <h4>Trackers List</h4>
+      <div class="tracker-list-text"><h4>Trackers List</h4></div>
+      <!-- Below is the tracker selector along with pagination controller -->
+      
       <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let tracker of trackers; let i = index"
+        <li class="list-group-item"
+          *ngFor="let tracker of trackers| paginate: { currentPage: page,
+            itemsPerPage: pageSize,
+            totalItems: count}
+           ;let i = index"
           [class.active]="i == currentIndex"
-          (click)="setActiveTracker(tracker, i)"
-        >
+          (click)="setActiveTracker(tracker, i)">
           {{ tracker.username }}
         </li>
-      </ul>
+      </ul>   
+
       <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTrackers()">
         Remove All
+      </button>
+      <button class="m-3 btn btn-sm btn-danger" (click)="deleteTracker()">
+        Remove this Task
       </button>
     </div>
     <div class="col-md-6">
@@ -48,5 +67,21 @@
         [viewMode]="true"
         [currentTracker]="currentTracker"
       ></app-tracker-details>
+
+      
     </div>
   </div>
+
+
+  <div class="col-md-12">
+    Items per Page:    
+<select (change)="handlePageSizeChange($event)">
+
+<option *ngFor="let size of pageSizes" [ngValue]="size">
+  {{ size }}
+</option>
+</select>
+
+
+  </div>
+</div>

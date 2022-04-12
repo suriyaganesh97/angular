@@ -9,9 +9,12 @@ const baseUrl = 'http://localhost:8080/api/tracker';
 })
 export class TrackerService {
   constructor(private http: HttpClient) { }
-  getAll(): Observable<Tracker[]> {
-    return this.http.get<Tracker[]>(baseUrl);
+  getAll(params: any): Observable<any> {
+    return this.http.get<any>(baseUrl, { params });
   }
+  // getAll(params:any): Observable<Tracker[]> {
+  //   return this.http.get<Tracker[]>(baseUrl, { params });
+  // }
   get(id: any): Observable<Tracker> {
     return this.http.get(`${baseUrl}/${id}`);
   }
@@ -31,7 +34,4 @@ export class TrackerService {
     return this.http.get<Tracker[]>(`${baseUrl}?username=${username}`);
   }
 }
-// export class TrackerService {
 
-//   constructor() { }
-// }

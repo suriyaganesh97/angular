@@ -1,3 +1,4 @@
+
 <div *ngIf="viewMode; else editable">
     <div *ngIf="currentTracker.id">
       <h4>Tracker</h4>
@@ -8,33 +9,37 @@
         <label><strong>Description:</strong></label>
         {{ currentTracker.userdescription }}
       </div>
+      
       <div>
-        <label><strong>Status:</strong></label>
-        {{ currentTracker.userpublished ? "Completed" : "Pending" }}
-      </div>
-      <!-- <div>
         <label><strong>Created At:</strong></label>
         {{ currentTracker.createdAt }}
       </div>
       <div>
         <label><strong>Update At:</strong></label>
-        {{ currentTracker.upatedAt  }}
-      </div> -->
-      <a
-        class="badge badge-warning"
-        routerLink="/trackers/{{ currentTracker.id }}"
-      >
-        Edit
-      </a>
+        {{ currentTracker.updatedAt  }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentTracker.userpublished ? "Completed" : "Pending" }}
+      </div>
+      <button 
+      class="m-3 btn btn-sm btn-success"
+      routerLink="/trackers/{{ currentTracker.id }}">
+    
+      Edit
+    </button>
+    
     </div>
     <div *ngIf="!currentTracker">
       <br />
       <p>Please click on a Tracker...</p>
     </div>
   </div>
+  
   <ng-template #editable>
-    <div *ngIf="currentTracker.id" class="edit-form">
-      <h4>Tracker</h4>
+    <div class="background-detail-class">
+    <div *ngIf="currentTracker.id" class="edit-form container my-3 bg-dark text-white">
+      <div class="tracker-edit-list"><h4>Tracker</h4></div>
       <form>
         <div class="form-group">
           <label for="title">Title</label>
@@ -57,12 +62,113 @@
           />
         </div>
         <div class="form-group">
+          <label for="prioritytype">Priority Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="prioritytype"
+            [(ngModel)]="currentTracker.prioritytype"
+            name="prioritytype"
+          />
+        </div>
+        <div class="form-group">
+          <label for="worktype">Work Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="worktype"
+            [(ngModel)]="currentTracker.worktype"
+            name="worktype"
+          />
+        </div>
+        <div class="form-group">
+          <label for="membername">Members Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="membername"
+            [(ngModel)]="currentTracker.membername"
+            name="membername"
+          />
+        </div>
+        
+        
+        <div class="form-group">
+          <label for="bankname">Bank Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="bankname"
+            [(ngModel)]="currentTracker.bankname"
+            name="bankname"
+          />
+        </div>
+        <div class="form-group">
+          <label for="regionbank">Region Bank</label>
+          <input
+            type="text"
+            class="form-control"
+            id="regionbank"
+            [(ngModel)]="currentTracker.regionbank"
+            name="regionbank"
+          />
+        </div>
+        <div class="form-group">
+          <label for="solution">Solution</label>
+          <input
+            type="text"
+            class="form-control"
+            id="solution"
+            [(ngModel)]="currentTracker.solution"
+            name="solution"
+          />
+        </div>
+        <div class="form-group">
+          <label for="comment">Comments</label>
+          <input
+            type="text"
+            class="form-control"
+            id="comment"
+            [(ngModel)]="currentTracker.comment"
+            name="comment"
+          />
+        </div>
+        <div class="form-group">
+          <label for="upload">Upload File</label>
+          <br>
+          <a class="text-primary" href="https://profinch.sharepoint.com/sites/presales/Shared%20Documents/Forms/AllItems.aspx">SharePoint</a>
+		  </div>
+  
+        <div class="form-group">
+          <label for="createdAt">Created At</label>
+          <input
+            type="text"
+            class="form-control"
+            id="createdAt"
+            [(ngModel)]="currentTracker.createdAt"
+            name="createdAt"
+            readonly
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="updatedAt">Updated At</label>
+          <input
+            type="text"
+            class="form-control"
+            id="updatedAt"
+            [(ngModel)]="currentTracker.updatedAt"
+            name="updatedAt"
+            readonly
+          />
+        </div>
+        <div class="form-group">
           <label><strong>Status:</strong></label>
           {{ currentTracker.userpublished ? "Completed" : "Pending" }}
         </div>
       </form>
       <button
-        class="badge badge-primary mr-2"
+        class="m-3 btn btn-sm btn-primary"
         *ngIf="currentTracker.userpublished"
         (click)="updatePublished(false)"
       >
@@ -70,25 +176,34 @@
       </button>
       <button
         *ngIf="!currentTracker.userpublished"
-        class="badge badge-primary mr-2"
+        class="m-3 btn btn-sm btn-primary"
         (click)="updatePublished(true)"
       >
         Completed
       </button>
-      <button class="badge badge-danger mr-2" (click)="deleteTracker()">
+      <button class="m-3 btn btn-sm btn-danger" (click)="deleteTracker()">
         Delete
       </button>
       <button
         type="submit"
-        class="badge badge-success mb-2"
+        class="m-3 btn btn-sm btn-success"
         (click)="updateTracker()"
       >
         Update
       </button>
+      <!-- <button (click)="exportExcel()">Export</button> -->
+      <br>
+      <button 
+      class="m-3 btn btn-sm btn-primary" 
+      routerLink="/trackers">Home Page 
+      </button>
+
       <p>{{ message }}</p>
     </div>
     <div *ngIf="!currentTracker.id">
       <br />
       <p>Cannot access this Tracker...</p>
     </div>
+  </div>
   </ng-template>
+

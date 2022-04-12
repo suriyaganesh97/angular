@@ -1,4 +1,5 @@
-<div>
+<div class="background-colour-class">
+<div class="container my-3 bg-dark text-white tracker-add-list">
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
@@ -22,6 +23,80 @@
             name="description"
           />
         </div>
+
+
+        <div class="form-group">
+          <label for="prioritytype">Priority Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="prioritytype"
+            [(ngModel)]="tracker.prioritytype"
+            name="prioritytype"
+          />
+        </div>
+        <div class="form-group">
+          <label for="worktype">Work Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="worktype"
+            [(ngModel)]="tracker.worktype"
+            name="worktype"
+          />
+        </div>
+        <div class="form-group">
+          <label for="membername">Members Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="membername"
+            [(ngModel)]="tracker.membername"
+            name="membername"
+          />
+        </div>
+        
+        
+        <div class="form-group">
+          <label for="bankname">Bank Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="bankname"
+            [(ngModel)]="tracker.bankname"
+            name="bankname"
+          />
+        </div>
+        <div class="form-group">
+          <label for="regionbank">Region Bank</label>
+          <input
+            type="text"
+            class="form-control"
+            id="regionbank"
+            [(ngModel)]="tracker.regionbank"
+            name="regionbank"
+          />
+        </div>
+        <div class="form-group">
+          <label for="solution">Solution</label>
+          <input
+            type="text"
+            class="form-control"
+            id="solution"
+            [(ngModel)]="tracker.solution"
+            name="solution"
+          />
+        </div>
+        <div class="form-group">
+          <label for="comment">Comments</label>
+          <input
+            type="text"
+            class="form-control"
+            id="comment"
+            [(ngModel)]="tracker.comment"
+            name="comment"
+          />
+        </div>
         <button (click)="saveTracker()" class="btn btn-success">Submit</button>
       </div>
       <div *ngIf="submitted">
@@ -31,3 +106,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -1,6 +1,7 @@
 module.exports = app => {
     const trackers = require("../controllers/tracker.controller.js");
     var router = require("express").Router();
+    const excelController = require("../controllers/excel.controller");
     // Create a new Tutorial
     router.post("/", trackers.create);
     // Retrieve all Tutorials
@@ -15,5 +16,10 @@ module.exports = app => {
     router.delete("/:id", trackers.delete);
     // Delete all Tutorials
     router.delete("/", trackers.deleteAll);
+    //excel download
+    // router.get("/download", excelController.download);
+    // app.use("/api/excel", router);
+   
+
     app.use('/api/tracker', router);
   };

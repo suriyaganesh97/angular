@@ -7,7 +7,8 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  @Input() msgFromParent1: any[];
+  @Input() messagelist: any[]; 
+  @Input() new_title:string;
   constructor() { }
 
   ngOnInit(): void {

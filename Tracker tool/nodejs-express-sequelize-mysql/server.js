@@ -5,10 +5,11 @@ const path = __dirname + '/app/views/';
 
 const app = express();
 const db = require("./app/models");
-//db.sequelize.sync();
+// db.sequelize.sync();
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
-// }); if force:true db will drop and create verytime we start the node
+// });
+// if force:true db will drop and create verytime we start the node
 db.sequelize.sync().then(() => {
   console.log("Db is running");
 });

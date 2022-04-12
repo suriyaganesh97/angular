@@ -1,6 +1,20 @@
 const db = require("../models");
 const Tracker = db.trackers;
 const Op = db.Sequelize.Op;
+const getPagination = (page, size) => {
+  const limit = size ? +size : 3;
+  const offset = page ? page * limit : 0;
+  return { limit, offset };
+};
+const getPagingData =  (data, page, limit) => {
+  const { count: totalItems, rows: trackers } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+  return { totalItems, trackers, totalPages, currentPage };
+};
+
+
+
 // Create and Save a new trackers
 exports.create = (req, res) => {
   // Validate request
@@ -14,7 +28,15 @@ exports.create = (req, res) => {
   const tracker = {
     username: req.body.username,
     userdescription: req.body.userdescription,
-    userpublished: req.body.userpublished ? req.body.userpublished : false
+    userpublished: req.body.userpublished ? req.body.userpublished : false,
+    prioritytype: req.body.prioritytype,
+    worktype: req.body.worktype,
+    membername: req.body.membername,
+    bankname: req.body.bankname,
+    regionbank: req.body.regionbank,
+    solution: req.body.solution,
+    comment: req.body.comment
+
   };
   // Save Tracker in the database
   Tracker.create(tracker)
@@ -30,18 +52,20 @@ exports.create = (req, res) => {
 };
 // Retrieve all trackers from the database.
 exports.findAll = (req, res) => {
-    const username = req.query.username;
-    var condition = username ? { username: { [Op.like]: `%${username}%` } } : null;
-    Tracker.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials."
-        });
+  const { page, size, username } = req.query;
+  var condition = username ? { username: { [Op.like]: `%${username}%` } } : null;
+  const { limit, offset } = getPagination(page, size);
+  Tracker.findAndCountAll({ where: condition, limit, offset })
+    .then(data => {
+      const response = getPagingData(data, page, limit);
+      res.send(response);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
       });
+    });
 };
 // Find a single trackers with an id
 exports.findOne = (req, res) => {
@@ -126,14 +150,17 @@ exports.deleteAll = (req, res) => {
 };
 // Find all trackers with completed=true
 exports.findAllPublished = (req, res) => {
-    Tracker.findAll({ where: { userpublished: true } })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving trackers."
-        });
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+  Tracker.findAndCountAll({ where: { userpublished: true }, limit, offset })
+    .then(data => {
+      const response = getPagingData(data, page, limit);
+      res.send(response);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
       });
-  };
+    });
+};

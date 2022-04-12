@@ -1,3 +1,24 @@
 .heading-align{
-    margin-right: 400px;
+    margin-right: 430px;
 }
+.navbar-align
+{
+    margin-bottom: 0px;
+    border-bottom-width: 40px;
+    
+}
+.navbar-colouring
+{
+    background-color: #FAFDD6;
+}
+.heading-font{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 26px;
+}
+.background-app-class{
+    
+    /* background-color: #8D8DAA; */
+    background-color:#DFDFDE;
+    height: 592px;
+}
+

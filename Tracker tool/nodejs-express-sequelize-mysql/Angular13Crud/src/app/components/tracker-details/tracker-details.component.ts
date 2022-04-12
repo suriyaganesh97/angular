@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tracker } from 'src/app/models/tracker.model';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-tracker-details',
   templateUrl: './tracker-details.component.html',
@@ -9,12 +10,22 @@ import { Tracker } from 'src/app/models/tracker.model';
 })
 export class TrackerDetailsComponent implements OnInit {
   @Input() viewMode = false;
+  
   @Input() currentTracker: Tracker = {
     username: '',
     userdescription: '',
-    userpublished: false
+    userpublished: false,
+    createdAt: '',
+    updatedAt: '',
+    prioritytype:'',
+    worktype: '', 
+    membername: '',
+    bankname: '', 
+    regionbank: '', 
+    solution: '', 
+    comment:''
   };
-  
+  //createddate = 'test';
   message = '';
   constructor(
     private trackerService: TrackerService,
@@ -27,10 +38,17 @@ export class TrackerDetailsComponent implements OnInit {
     }
   }
   getTracker(id: string): void {
+    
+    // createddate = this.currentTracker.createdAt.substring(1,2) 
     this.trackerService.get(id)
       .subscribe({
         next: (data) => {
           this.currentTracker = data;
+          // let createddate = this.currentTracker.createdAt;
+          // if(typeof createddate==='string'){
+          //   createddate  = createddate.substring(1,10);
+          // }
+          
           console.log(data);
         },
         error: (e) => console.error(e)
@@ -40,7 +58,13 @@ export class TrackerDetailsComponent implements OnInit {
     const data = {
       username: this.currentTracker.username,
       userdescription: this.currentTracker.userdescription,
-      userpublished: status
+      userpublished: status,
+      worktype: this.currentTracker.worktype,
+      membername: this.currentTracker.membername,
+      bankname: this.currentTracker.bankname,
+      regionbank: this.currentTracker.regionbank,
+      solution: this.currentTracker.solution,
+      comment: this.currentTracker.comment
     };
     this.message = '';
     this.trackerService.update(this.currentTracker.id, data)
@@ -74,4 +98,10 @@ export class TrackerDetailsComponent implements OnInit {
         error: (e) => console.error(e)
       });
   }
+  exportExcel() {
+    // const workSheet = XLSX.utils.json_to_sheet(this.getTracker.data, {header:['dataprop1', 'dataprop2']});
+    const workBook: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(workBook, workSheet, 'SheetName');
+    XLSX.writeFile(workBook, 'filename.xlsx');
+}
 }

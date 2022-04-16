@@ -15,6 +15,11 @@ export class AppComponent {
     msg: 'Test three notification'  
 }, ];  
 new_title = "suriya";
+onAddName(textname:HTMLInputElement){
+  console.log(textname);
+  console.log(textname.value);
+}
+
   constructor() {
     testComponent: TestComponent
 

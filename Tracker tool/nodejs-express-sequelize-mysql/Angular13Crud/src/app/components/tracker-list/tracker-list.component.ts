@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tracker } from 'src/app/models/tracker.model';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
   selector: 'app-tracker-list',
@@ -20,13 +21,31 @@ export class TrackerListComponent implements OnInit {
   count = 0;
   pageSize = 3;
   pageSizes = [3, 6];
+  priorityParamType='';
+  solutionParamType='';
+  prioritytypeVariable: any = ['High', 'Medium', 'Low'];
+  priorityvariable='';
+  
+  temp_priority_variable='';
+  prioritytypeform = this.fb.group({
+    prioritytype: ''
+  })
+  solutiontypeVariable: any = ['Finflowz', 'FinCluez', 'Oracle Consulting'];
+  solutionvariable='';
+  temp_solution_variable='';
+  solutiontypeform = this.fb.group({
+    solutiontype: ''
+    // solutiontype: ['']
+  })
   constructor(private trackerService: TrackerService,
-    private router: Router) { }
+    private router: Router,public fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.retrieveTrackers();
+    
   }
   getRequestParams(searchTitle: string, page: number, pageSize: number): any {
+    
     let params: any = {};
     if (searchTitle) {
       params[`username`] = searchTitle;
@@ -40,9 +59,71 @@ export class TrackerListComponent implements OnInit {
     }
     return params;
   }
+  getRequestParamsBypriority(filterBypriorityTitle: string, page: number, pageSize: number): any {
+     
+    let params: any = {};
+    if (filterBypriorityTitle) {
+      params[`prioritytype`] = filterBypriorityTitle;
+    }
+    if (page) {
+      //params[`page`] = page ;
+      params[`page`] = page - 1;
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+    return params;
+  }
+  getRequestParamsBySolution(filterBySolutionTitle: string, page: number, pageSize: number): any {
+    let params: any = {};
+    if (filterBySolutionTitle) {
+      params[`solution`] = filterBySolutionTitle;
+    }
+    if (page) {
+      //params[`page`] = page ;
+      params[`page`] = page - 1;
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+    return params;
+  }
   retrieveTrackers(): void {
+    // debugger;
     const params = this.getRequestParams(this.username, this.page, this.pageSize);
     this.trackerService.getAll(params)
+    .subscribe(
+      response => {
+        const { trackers, totalItems } = response;
+        this.trackers = trackers;
+        this.count = totalItems;
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+  retrieveTrackersByPriority(): void {
+     this.priorityParamType = this.prioritytypeform.value["prioritytype"];
+     //debugger;
+    const paramsBypriority = this.getRequestParamsBypriority(this.priorityParamType, this.page, this.pageSize);
+    this.trackerService.getAllBypriority(paramsBypriority)
+    .subscribe(
+      response => {
+        const { trackers, totalItems } = response;
+        this.trackers = trackers;
+        this.count = totalItems;
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+  retrieveTrackersBySolution(): void {
+    this.solutionParamType = this.solutiontypeform.value["solutiontype"];
+    const paramsBySolution = this.getRequestParamsBySolution(this.solutionParamType, this.page, this.pageSize);
+    debugger;
+    this.trackerService.getAllBySolution(paramsBySolution)
     .subscribe(
       response => {
         const { trackers, totalItems } = response;
@@ -75,7 +156,7 @@ removeAllTrackers(): void {
 }
 
 handlePageChange(event: number): void {
-  debugger;
+ 
     this.page = event;
     this.refreshList();
     this.retrieveTrackers();
@@ -88,8 +169,14 @@ handlePageChange(event: number): void {
   
   
 searchTitle(): void {
+ 
   this.page = 1;
     this.retrieveTrackers();
+}
+searchByPriority(): void {
+   
+  this.page = 1;
+    this.retrieveTrackersByPriority();
 }
 cancelTitle(): void {
   this.page = 1;
@@ -97,6 +184,12 @@ cancelTitle(): void {
   this.username = '';
   this.refreshList();
 }
+
+searchBySolution(): void {
+  this.page = 1;
+    this.retrieveTrackersBySolution();
+}
+
 deleteTracker(): void {
   this.trackerService.delete(this.currentTracker.id)
     .subscribe({

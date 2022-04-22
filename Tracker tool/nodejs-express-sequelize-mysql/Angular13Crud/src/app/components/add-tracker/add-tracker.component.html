@@ -25,7 +25,7 @@
         </div>
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="prioritytype">Priority Type</label>
           <input
             type="text"
@@ -34,7 +34,18 @@
             [(ngModel)]="tracker.prioritytype"
             name="prioritytype"
           />
-        </div>
+        </div> -->
+        <label for="prioritytype">Priority type</label>
+        <form [formGroup]="prioritytypeform">
+          <select formControlName="prioritytype">
+            <option *ngFor="let priorityvariable of prioritytypeVariable">
+              {{priorityvariable}}</option>
+          </select>
+        </form>
+        
+
+
+
         <div class="form-group">
           <label for="worktype">Work Type</label>
           <input
@@ -45,6 +56,10 @@
             name="worktype"
           />
         </div>
+        
+
+
+
         <div class="form-group">
           <label for="membername">Members Name</label>
           <input
@@ -77,7 +92,7 @@
             name="regionbank"
           />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="solution">Solution</label>
           <input
             type="text"
@@ -86,7 +101,20 @@
             [(ngModel)]="tracker.solution"
             name="solution"
           />
-        </div>
+        </div> -->
+
+        <label for="solutiontype">Solution type</label>
+        <form [formGroup]="solutiontypeform">
+          
+          <select formControlName="solutiontype">
+            <option *ngFor="let solutionvariable of solutiontypeVariable">
+              {{solutionvariable}}</option>
+          </select>
+        </form>
+
+
+
+
         <div class="form-group">
           <label for="comment">Comments</label>
           <input
@@ -101,8 +129,8 @@
       </div>
       <div *ngIf="submitted">
         <h4>Tracker was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newTracker()">Add</button>
-        <button class="btn btn-primary home-page-link" routerLink="/trackers">Home Page</button>
+        <button class="btn btn-success" (click)="newTracker()" routerLink="/add">Add</button>
+        <button class="btn btn-primary home-page-link" routerLink="..">Home Page</button>
       </div>
     </div>
   </div>

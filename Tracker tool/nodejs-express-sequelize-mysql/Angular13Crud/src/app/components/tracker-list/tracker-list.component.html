@@ -1,46 +1,82 @@
 <div class="container-fluid">
-<div class="list row">
-  <div class="search-align">
-    <div class="col-md-8">
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by Name"
-          [(ngModel)]="username"
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-primary search-button"
-            type="button"
-            (click)="searchTitle()"
-          >
-            Search
-          </button>
-        </div>
-        <div class="input-group-append">
-          <button
-            class="btn btn-primary cancel-button"
-            type="button"
-            (click)="cancelTitle()"
-          >
-            Cancel
-          </button>
+  <div class="list row">
+    <div class="search-align">
+      <div class="col-md-8">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search by Name"
+            [(ngModel)]="username"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary search-button"
+              type="button"
+              (click)="searchTitle()"
+            >
+              Search
+            </button>
+          </div>
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary cancel-button"
+              type="button"
+              (click)="cancelTitle()"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  
-  <div class="col-md-8 pagination-control-list">
-    <pagination-controls 
-  previousLabel="Prev"
-  nextLabel="Next"
-  (pageChange)="handlePageChange($event)"
-  ></pagination-controls>
-  </div>
+    
+    
+<div class="filter-align">
+  <div class="individual_components">
+    
+  <form [formGroup]="prioritytypeform">
+    <select formControlName="prioritytype">
+      <option *ngFor="let priorityvariable of prioritytypeVariable">
+        {{priorityvariable}}</option>
+    </select>
+  </form>
+</div>
+<div class="individual_components">
+      <button
+        class="btn btn-outline-dark search-button"
+        type="button"
+        (click)="searchByPriority()"
+      >
+        Filter by Priority
+      </button>
+    </div>
+   
+
+<div class="individual_components">		 
+  <form [formGroup]="solutiontypeform">
+    <select formControlName="solutiontype">
+      <option *ngFor="let solutionvariable of solutiontypeVariable">
+        {{solutionvariable}}</option>
+    </select>
+  </form>
+</div>
+
+
+
+<div class="individual_components">
+      <button
+        class="btn btn-outline-dark search-button"
+        type="button"
+        (click)="searchBySolution()"
+      >
+        Filter by Solution
+      </button>
+</div>
+</div>
+    
     <div class="col-md-6">
-      <div class="tracker-list-text"><h4>Trackers List</h4></div>
+      <div class="tracker-list-text"><h4>Trackers List</h4>
       <!-- Below is the tracker selector along with pagination controller -->
       
       <ul class="list-group">
@@ -54,34 +90,47 @@
           {{ tracker.username }}
         </li>
       </ul>   
-
-      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTrackers()">
+    </div>
+      <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTrackers()">
         Remove All
-      </button>
+      </button> -->
       <button class="m-3 btn btn-sm btn-danger" (click)="deleteTracker()">
         Remove this Task
       </button>
     </div>
-    <div class="col-md-6">
-      <app-tracker-details
-        [viewMode]="true"
-        [currentTracker]="currentTracker"
-      ></app-tracker-details>
-
-      
+      <div class="col-md-6 tracker-list-align">
+        <app-tracker-details
+          [viewMode]="true"
+          [currentTracker]="currentTracker"
+        ></app-tracker-details>
+      </div>
     </div>
+    
+    <div class="footer-align-class">
+    <table class="table">
+      <td>
+        <div class="col-xs-6 pagination-control-list">
+        <pagination-controls 
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="handlePageChange($event)"
+      ></pagination-controls>
+      </div>
+    </td>
+        <td>
+          <div class="col-xs-6 page-size-class">
+            Items per Page:    
+        <select (change)="handlePageSizeChange($event)">
+        
+        <option *ngFor="let size of pageSizes" [ngValue]="size">
+          {{ size }}
+        </option>
+        </select>
+          </div>
+
+        </td>
+      </table>
+    </div>
+ 
   </div>
 
-
-  <div class="col-md-12">
-    Items per Page:    
-<select (change)="handlePageSizeChange($event)">
-
-<option *ngFor="let size of pageSizes" [ngValue]="size">
-  {{ size }}
-</option>
-</select>
-
-
-  </div>
-</div>

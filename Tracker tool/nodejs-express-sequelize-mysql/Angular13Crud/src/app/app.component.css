@@ -9,7 +9,8 @@
 }
 .navbar-colouring
 {
-    background-color: #FAFDD6;
+    /* background-color: #FAFDD6; */
+    background-color:#98e7bc;
 }
 .heading-font{
     font-family: 'Bebas Neue', cursive;
@@ -19,6 +20,6 @@
     
     /* background-color: #8D8DAA; */
     background-color:#DFDFDE;
-    height: 592px;
+    height: 730px;
 }
 

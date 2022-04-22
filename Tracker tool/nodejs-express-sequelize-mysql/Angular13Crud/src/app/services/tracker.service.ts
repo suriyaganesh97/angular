@@ -15,6 +15,12 @@ export class TrackerService {
   // getAll(params:any): Observable<Tracker[]> {
   //   return this.http.get<Tracker[]>(baseUrl, { params });
   // }
+  getAllBypriority(params: any): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/filterwithpriority`, { params });
+  }
+  getAllBySolution(params: any): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/filterwithsolution`, { params });
+  }
   get(id: any): Observable<Tracker> {
     return this.http.get(`${baseUrl}/${id}`);
   }

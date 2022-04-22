@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { TestComponent } from './test/test.component';
 import { NewComponent } from './new/new.component';
 @Component({
@@ -7,6 +7,8 @@ import { NewComponent } from './new/new.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+ 
+  
   messagelist = [{  
     id: 1,  
     msg: 'Test two notification'  
@@ -15,10 +17,7 @@ export class AppComponent {
     msg: 'Test three notification'  
 }, ];  
 new_title = "suriya";
-onAddName(textname:HTMLInputElement){
-  console.log(textname);
-  console.log(textname.value);
-}
+
 
   constructor() {
     testComponent: TestComponent

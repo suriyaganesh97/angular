@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Ms+Madi&family=Water+Brush&display=swap');
+.skill_heading_selector{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 30px;
+}
+.skill_text_selector{
+    font-family: 'Ms Madi', cursive;
+    font-size: 30px;
+}
+.progress_alignment{
+    width:20%;
+}

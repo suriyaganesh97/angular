@@ -15,17 +15,22 @@
 .search-align
 {
   height: 70px;
-    width: 700px;
+    width: 600px;
     padding-top: 40px;
+    margin-left: 70px;
 }
 .individual_components{
   height: 40px;
 }
-/* .filter-align{
-   height: 70px;
-    width: 300px; 
-    
-} */
+.filter-align{
+  padding-left: 600px;
+}
+.button_padding{
+  margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
 /* .priorityboxalign{
   display: inline-block;
 } */

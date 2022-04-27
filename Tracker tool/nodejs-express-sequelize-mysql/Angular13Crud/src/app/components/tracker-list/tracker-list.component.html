@@ -32,47 +32,34 @@
     </div>
     
     
-<div class="filter-align">
-  <div class="individual_components">
-    
-  <form [formGroup]="prioritytypeform">
+<div class="filter-align" style = "display:inline">
+  <form [formGroup]="prioritytypeform" style = "display:inline">
     <select formControlName="prioritytype">
       <option *ngFor="let priorityvariable of prioritytypeVariable">
         {{priorityvariable}}</option>
     </select>
   </form>
-</div>
-<div class="individual_components">
       <button
-        class="btn btn-outline-dark search-button"
+        class="btn btn-outline-dark search-button button_padding"
         type="button"
         (click)="searchByPriority()"
       >
         Filter by Priority
       </button>
-    </div>
-   
-
-<div class="individual_components">		 
-  <form [formGroup]="solutiontypeform">
+<br>
+  <form [formGroup]="solutiontypeform" style = "display:inline">
     <select formControlName="solutiontype">
       <option *ngFor="let solutionvariable of solutiontypeVariable">
         {{solutionvariable}}</option>
     </select>
   </form>
-</div>
-
-
-
-<div class="individual_components">
       <button
-        class="btn btn-outline-dark search-button"
+        class="btn btn-outline-dark search-button button_padding"
         type="button"
         (click)="searchBySolution()"
       >
         Filter by Solution
       </button>
-</div>
 </div>
     
     <div class="col-md-6">

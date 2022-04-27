@@ -104,8 +104,13 @@ export class TrackerListComponent implements OnInit {
       });
   }
   retrieveTrackersByPriority(): void {
-     this.priorityParamType = this.prioritytypeform.value["prioritytype"];
-     //debugger;
+    if(this.prioritytypeform.value["prioritytype"]){
+      this.priorityParamType = this.prioritytypeform.value["prioritytype"];
+    }
+    else{
+      this.priorityParamType = "High";
+    }
+
     const paramsBypriority = this.getRequestParamsBypriority(this.priorityParamType, this.page, this.pageSize);
     this.trackerService.getAllBypriority(paramsBypriority)
     .subscribe(
@@ -120,7 +125,13 @@ export class TrackerListComponent implements OnInit {
       });
   }
   retrieveTrackersBySolution(): void {
-    this.solutionParamType = this.solutiontypeform.value["solutiontype"];
+    if(this.solutiontypeform.value["solutiontype"]){
+      this.solutionParamType = this.solutiontypeform.value["solutiontype"];
+    }
+    else{
+      this.solutionParamType = "Finflowz";
+    }
+    
     const paramsBySolution = this.getRequestParamsBySolution(this.solutionParamType, this.page, this.pageSize);
     debugger;
     this.trackerService.getAllBySolution(paramsBySolution)

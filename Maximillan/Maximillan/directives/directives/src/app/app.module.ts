@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { TestDirective } from './test/test.directive';
 import { NewDirective } from './new/new.directive';
 import { BetterHighlightDirective } from './better/better-highlight.directive';
+import { HostlisttestingComponent } from './hostlisttesting/hostlisttesting.component';
 @NgModule({
   declarations: [
     AppComponent,
     TestDirective,
     NewDirective,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    HostlisttestingComponent
   ],
   imports: [
     BrowserModule,

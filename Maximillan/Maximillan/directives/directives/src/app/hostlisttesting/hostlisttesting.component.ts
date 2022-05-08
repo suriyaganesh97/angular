@@ -21,8 +21,16 @@ import { Component, OnInit,Directive,HostListener } from '@angular/core';
 //   template: '<button counting>Increment</button>',
 // })
 export class HostlisttestingComponent implements OnInit {
-
-  constructor() { }
+  checkcondition:boolean =true;
+  
+  constructor() { 
+    if(!this.checkcondition){
+      console.log(this.checkcondition);
+    }
+    else{
+      console.log(!this.checkcondition);
+    }
+  }
 
   ngOnInit(): void {
   }

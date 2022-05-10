@@ -7,13 +7,15 @@ import { TestDirective } from './test/test.directive';
 import { NewDirective } from './new/new.directive';
 import { BetterHighlightDirective } from './better/better-highlight.directive';
 import { HostlisttestingComponent } from './hostlisttesting/hostlisttesting.component';
+import { DropdownDirective } from './drop/dropdown.directive';
 @NgModule({
   declarations: [
     AppComponent,
     TestDirective,
     NewDirective,
     BetterHighlightDirective,
-    HostlisttestingComponent
+    HostlisttestingComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,

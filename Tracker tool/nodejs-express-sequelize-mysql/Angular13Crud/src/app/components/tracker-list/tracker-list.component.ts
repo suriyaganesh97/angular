@@ -17,6 +17,7 @@ export class TrackerListComponent implements OnInit {
   currentIndex = -1;
   username = '';
   title = '';
+  userpublished = false;
   page = 1;
   count = 0;
   pageSize = 3;
@@ -59,6 +60,24 @@ export class TrackerListComponent implements OnInit {
     }
     return params;
   }
+
+  getRequestParamsByCompleted(userpublished:boolean,page: number, pageSize: number): any {
+    
+    let params: any = {};
+    
+    if (page) {
+      //params[`page`] = page ;
+      params[`page`] = page - 1;
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+    if(userpublished){
+      params[`userpublished`] = userpublished;
+    }
+    return params;
+  }
+
   getRequestParamsBypriority(filterBypriorityTitle: string, page: number, pageSize: number): any {
      
     let params: any = {};
@@ -103,6 +122,26 @@ export class TrackerListComponent implements OnInit {
         console.log(error);
       });
   }
+
+  retrieveCompletedTrackers(): void {
+    // debugger;
+    // alert("inside completed tracker func");
+    const paramsforCompletedTrackers = this.getRequestParamsByCompleted( this.userpublished,this.page, this.pageSize);
+    this.trackerService.getAllCompletedTracker(paramsforCompletedTrackers)
+    .subscribe(
+      response => {
+        const { trackers, totalItems } = response;
+        this.trackers = trackers;
+        this.count = totalItems;
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+
+
   retrieveTrackersByPriority(): void {
     if(this.prioritytypeform.value["prioritytype"]){
       this.priorityParamType = this.prioritytypeform.value["prioritytype"];

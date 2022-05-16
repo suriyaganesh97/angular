@@ -1,9 +1,19 @@
 <div class="background-colour-class">
+ 
 <div class="container my-3 bg-dark text-white tracker-add-list">
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
-          <label for="title">Name</label>
+          
+          <label for="nametype">Name</label>
+        <form [formGroup]="nametypeform">
+          <select formControlName="nametype">
+            <option *ngFor="let namevariable of nametypeVariable">
+              {{namevariable}}</option>
+          </select>
+        </form>
+
+          <!-- <label for="title">Name</label>
           <input
             type="text"
             class="form-control"
@@ -11,7 +21,7 @@
             required
             [(ngModel)]="tracker.username"
             name="name"
-          />
+          /> -->
         </div>
         <div class="form-group">
           <label for="description">Description</label>
@@ -42,34 +52,29 @@
               {{priorityvariable}}</option>
           </select>
         </form>
+        <br>
+
+        <label for="worktype">WorkType</label>
+        <form [formGroup]="worktypeform">
+          <select formControlName="worktype">
+            <option *ngFor="let workvariable of worktypeVariable">
+              {{workvariable}}</option>
+          </select>
+        </form>
+
         
-
-
-
-        <div class="form-group">
-          <label for="worktype">Work Type</label>
-          <input
-            type="text"
-            class="form-control"
-            id="worktype"
-            [(ngModel)]="tracker.worktype"
-            name="worktype"
-          />
-        </div>
         
+        
+          <div class="form-group member_group_colouring" >
+        <mat-form-field appearance="fill" style="padding-top: 0px;padding-right: 0px;padding-left: 0px;">
+          <mat-label>Members Name</mat-label>
+          <mat-select [formControl]="member" multiple>
+            <mat-option *ngFor="let member of memberList" [value]="member">{{member}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-
-
-        <div class="form-group">
-          <label for="membername">Members Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="membername"
-            [(ngModel)]="tracker.membername"
-            name="membername"
-          />
-        </div>
+        
         
         
         <div class="form-group">
@@ -82,26 +87,20 @@
             name="bankname"
           />
         </div>
-        <div class="form-group">
-          <label for="regionbank">Region Bank</label>
-          <input
-            type="text"
-            class="form-control"
-            id="regionbank"
-            [(ngModel)]="tracker.regionbank"
-            name="regionbank"
-          />
-        </div>
-        <!-- <div class="form-group">
-          <label for="solution">Solution</label>
-          <input
-            type="text"
-            class="form-control"
-            id="solution"
-            [(ngModel)]="tracker.solution"
-            name="solution"
-          />
-        </div> -->
+
+        <label for="regiontype">Region type</label>
+        <form [formGroup]="regiontypeform">
+          
+          <select formControlName="regiontype">
+            <option *ngFor="let regionvariable of regiontypeVariable">
+              {{regionvariable}}</option>
+          </select>
+        </form>
+
+        
+
+        
+        
 
         <label for="solutiontype">Solution type</label>
         <form [formGroup]="solutiontypeform">
@@ -129,7 +128,7 @@
       </div>
       <div *ngIf="submitted">
         <h4>Tracker was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newTracker()" routerLink="/add">Add</button>
+        <button class="btn btn-success" (click)="newTracker()" routerLink="add">Add</button>
         <button class="btn btn-primary home-page-link" routerLink="..">Home Page</button>
       </div>
     </div>

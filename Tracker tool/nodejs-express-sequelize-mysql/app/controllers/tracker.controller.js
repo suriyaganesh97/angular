@@ -144,6 +144,25 @@ exports.findAllBySolutionFilter = (req, res) => {
     });
 };
 
+
+exports.findAllByCompletedFilter = (req, res) => {
+  const { page, size, userpublished } = req.query;
+  var condition = userpublished ? { userpublished: { [Op.like]: `%${userpublished}%` } } : null;
+  const { limit, offset } = getPagination(page, size);
+  Tracker.findAndCountAll({ where: condition, limit, offset })
+    .then(data => {
+      const response = getPagingData(data, page, limit);
+      res.send(response);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
+
+
 // Delete a trackers with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;

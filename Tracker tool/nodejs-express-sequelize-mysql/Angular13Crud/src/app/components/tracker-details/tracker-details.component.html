@@ -42,7 +42,15 @@
     <div *ngIf="currentTracker.id" class="edit-form container my-3 bg-dark text-white">
       <div class="tracker-edit-list"><h4>Tracker</h4></div>
       <form>
-        <div class="form-group">
+
+        <label for="nametype">Name</label>
+        <form [formGroup]="nametypeform">
+          <select formControlName="nametype">
+            <option *ngFor="let namevariable of nametypeVariable">
+              {{namevariable}}</option>
+          </select>
+        </form>
+        <!-- <div class="form-group">
           <label for="title">Title</label>
           <input
             type="text"
@@ -51,7 +59,7 @@
             [(ngModel)]="currentTracker.username"
             name="title"
           />
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="description">Description</label>
           <input
@@ -62,16 +70,7 @@
             name="description"
           />
         </div>
-        <!-- <div class="form-group">
-          <label for="prioritytype">Priority Type</label>
-          <input
-            type="text"
-            class="form-control"
-            id="prioritytype"
-            [(ngModel)]="currentTracker.prioritytype"
-            name="prioritytype"
-          />
-        </div> -->
+        
         <label for="prioritytype">Priority type</label>
         <form [formGroup]="prioritytypeform">
           <select formControlName="prioritytype">
@@ -79,7 +78,15 @@
               {{priorityvariable}}</option>
           </select>
         </form>
-        <div class="form-group">
+        <label for="worktype">WorkType</label>
+        <form [formGroup]="worktypeform">
+          <select formControlName="worktype">
+            <option *ngFor="let workvariable of worktypeVariable">
+              {{workvariable}}</option>
+          </select>
+        </form>
+        
+        <!-- <div class="form-group">
           <label for="worktype">Work Type</label>
           <input
             type="text"
@@ -88,8 +95,17 @@
             [(ngModel)]="currentTracker.worktype"
             name="worktype"
           />
+        </div> -->
+
+        <div class="form-group member_group_colouring" >
+          <mat-form-field appearance="fill" style="padding-top: 0px;padding-right: 0px;padding-left: 0px;">
+            <mat-label>Members Name</mat-label>
+            <mat-select [formControl]="member" multiple>
+              <mat-option *ngFor="let member of memberList" [value]="member">{{member}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="membername">Members Name</label>
           <input
             type="text"
@@ -98,7 +114,7 @@
             [(ngModel)]="currentTracker.membername"
             name="membername"
           />
-        </div>
+        </div> -->
         
         
         <div class="form-group">
@@ -111,8 +127,18 @@
             name="bankname"
           />
         </div>
-        <div class="form-group">
-          <label for="regionbank">Region Bank</label>
+
+        <label for="regiontype">Region type</label>
+        <form [formGroup]="regiontypeform">
+          
+          <select formControlName="regiontype">
+            <option *ngFor="let regionvariable of regiontypeVariable">
+              {{regionvariable}}</option>
+          </select>
+        </form>
+        
+        <!-- <div class="form-group">
+          <label for="regionbank">Region</label>
           <input
             type="text"
             class="form-control"
@@ -120,7 +146,7 @@
             [(ngModel)]="currentTracker.regionbank"
             name="regionbank"
           />
-        </div>
+        </div> -->
         <!-- <div class="form-group">
           <label for="solution">Solution</label>
           <input

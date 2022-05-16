@@ -17,6 +17,7 @@
   "author": "suriya ganesh",
   "license": "ISC",
   "dependencies": {
+    "@angular/material": "^13.3.6",
     "cors": "^2.8.5",
     "exceljs": "^4.3.0",
     "express": "^4.17.3",

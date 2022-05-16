@@ -12,6 +12,9 @@ export class TrackerService {
   getAll(params: any): Observable<any> {
     return this.http.get<any>(baseUrl, { params });
   }
+  getAllCompletedTracker(params: any): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/published`, { params });
+  }
   // getAll(params:any): Observable<Tracker[]> {
   //   return this.http.get<Tracker[]>(baseUrl, { params });
   // }

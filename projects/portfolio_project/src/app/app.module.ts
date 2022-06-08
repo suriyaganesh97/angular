@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './pagemodule/navbar/navbar.component';
 import { SkillLevelComponent } from './pagemodule/skill-level/skill-level.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +16,9 @@ import { SkillLevelComponent } from './pagemodule/skill-level/skill-level.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

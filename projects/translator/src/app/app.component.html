@@ -1,0 +1,13 @@
+<!-- <li *ngFor="let output of json_output">
+  {{output}}
+</li> -->
+<li *ngFor="let agentstatus of agent_active_arr">
+ 
+  <div *ngIf="agentstatus;else other_content_new">
+    yes
+  </div>
+  <ng-template #other_content_new>
+    no
+  </ng-template>
+</li>
+

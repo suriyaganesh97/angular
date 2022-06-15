@@ -7,6 +7,8 @@ import { NavbarComponent } from './pagemodule/navbar/navbar.component';
 import { SkillLevelComponent } from './pagemodule/skill-level/skill-level.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
+import { ButtonsModule, WavesModule, IconsModule } from 'angular-bootstrap-md'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,10 @@ import {MatMenuModule} from '@angular/material/menu';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatMenuModule
+    MatMenuModule,
+    ButtonsModule,
+    WavesModule,
+    IconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

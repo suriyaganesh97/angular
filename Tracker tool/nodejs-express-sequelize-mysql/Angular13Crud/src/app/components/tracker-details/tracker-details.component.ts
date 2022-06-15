@@ -108,6 +108,7 @@ export class TrackerDetailsComponent implements OnInit {
     //  reordering the array so that first element in dropdown is the already
     // existing option selected in backend
     //below two examples are hardcoded for priority and solution type
+    
     if(currentTrackerValue.prioritytype =='Medium'){
       this.prioritytypeVariable = ['Medium','High','Low'];
     }

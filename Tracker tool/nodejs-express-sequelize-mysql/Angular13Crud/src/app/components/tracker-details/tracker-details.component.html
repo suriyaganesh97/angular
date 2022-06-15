@@ -2,14 +2,18 @@
 <div *ngIf="viewMode; else editable">
     <div *ngIf="currentTracker.id">
       <h4>Tracker</h4>
-      <div>
-        <label><strong>Title:</strong></label> {{ currentTracker.username }}
-      </div>
-      <div>
-        <label><strong>Description:</strong></label>
-        {{ currentTracker.userdescription }}
-      </div>
+     
       
+
+      <div>
+        <label><strong>Solution:</strong></label> {{ currentTracker.solution }}
+      </div>
+      <div>
+        <label><strong>Member Name:</strong></label>
+        {{ currentTracker.membername }}
+      </div>
+
+
       <div>
         <label><strong>Created At:</strong></label>
         {{ currentTracker.createdAt }}
@@ -86,16 +90,7 @@
           </select>
         </form>
         
-        <!-- <div class="form-group">
-          <label for="worktype">Work Type</label>
-          <input
-            type="text"
-            class="form-control"
-            id="worktype"
-            [(ngModel)]="currentTracker.worktype"
-            name="worktype"
-          />
-        </div> -->
+        
 
         <div class="form-group member_group_colouring" >
           <mat-form-field appearance="fill" style="padding-top: 0px;padding-right: 0px;padding-left: 0px;">
@@ -137,26 +132,8 @@
           </select>
         </form>
         
-        <!-- <div class="form-group">
-          <label for="regionbank">Region</label>
-          <input
-            type="text"
-            class="form-control"
-            id="regionbank"
-            [(ngModel)]="currentTracker.regionbank"
-            name="regionbank"
-          />
-        </div> -->
-        <!-- <div class="form-group">
-          <label for="solution">Solution</label>
-          <input
-            type="text"
-            class="form-control"
-            id="solution"
-            [(ngModel)]="currentTracker.solution"
-            name="solution"
-          />
-        </div> -->
+       
+        
         <label for="solutiontype">Solution type</label>
         <form [formGroup]="solutiontypeform">
           <select formControlName="solutiontype">
@@ -232,7 +209,7 @@
       >
         Update
       </button>
-      <!-- <button (click)="exportExcel()">Export</button> -->
+    
       <br>
       <button 
       class="m-3 btn btn-sm btn-primary" 

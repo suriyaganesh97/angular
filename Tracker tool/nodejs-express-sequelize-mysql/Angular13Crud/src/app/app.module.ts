@@ -12,15 +12,20 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { NgChartsModule } from 'ng2-charts';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTrackerComponent,
     TrackerDetailsComponent,
-    TrackerListComponent
+    TrackerListComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxPaginationModule,
     ReactiveFormsModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTooltipModule,
+    MatInputModule,
+    MatButtonModule,
+    NgChartsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

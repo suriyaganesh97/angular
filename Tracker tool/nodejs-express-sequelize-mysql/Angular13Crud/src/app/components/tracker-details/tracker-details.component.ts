@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tracker } from 'src/app/models/tracker.model';
-import { FormBuilder,FormControl } from "@angular/forms";
+import { UntypedFormBuilder,UntypedFormControl } from "@angular/forms";
 import {MatSelectModule} from '@angular/material/select';
 import * as XLSX from 'xlsx';
 @Component({
@@ -50,7 +50,7 @@ export class TrackerDetailsComponent implements OnInit {
   temp_check_for_regionbank ='' ;
   region_swap_variable ='';
 
-  member = new FormControl();
+  member = new UntypedFormControl();
   memberList: string[] = ['Akshata','Albert','Amlan','Anand','Bathri','Chandramouli','Mahesh','Manish','Prem','Priyanka','Ramanath','Rohan','Sachin','Sriram','Suriya','Vinith'];
   temp_member_variable='';
   member_name_array:string[]=[''];
@@ -95,7 +95,7 @@ export class TrackerDetailsComponent implements OnInit {
     private trackerService: TrackerService,
     private route: ActivatedRoute,
     private router: Router,
-    public fb: FormBuilder) { }
+    public fb: UntypedFormBuilder) { }
   ngOnInit(): void {
     
     if (!this.viewMode) {

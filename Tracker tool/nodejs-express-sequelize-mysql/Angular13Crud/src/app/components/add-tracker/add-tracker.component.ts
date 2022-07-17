@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Tracker } from 'src/app/models/tracker.model';
 import { TrackerService } from 'src/app/services/tracker.service';
-import { FormBuilder,FormControl } from "@angular/forms";
+import { UntypedFormBuilder,UntypedFormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-add-tracker',
@@ -48,7 +48,7 @@ export class AddTrackerComponent implements OnInit {
     
   })
 
-  member = new FormControl();
+  member = new UntypedFormControl();
   memberList: string[] = ['Akshata','Albert','Amlan','Anand','Bathri','Chandramouli','Mahesh','Manish','Prem','Priyanka','Ramanath','Rohan','Sachin','Sriram','Suriya','Vinith'];
   temp_member_variable='';
   member_name_array:string[]=[''];
@@ -71,7 +71,7 @@ export class AddTrackerComponent implements OnInit {
     comment:''
   };
   submitted = false;
-  constructor(private trackerService: TrackerService,public fb: FormBuilder) { }
+  constructor(private trackerService: TrackerService,public fb: UntypedFormBuilder) { }
 
 
   ngOnInit(): void {

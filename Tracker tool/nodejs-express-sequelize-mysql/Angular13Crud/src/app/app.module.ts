@@ -16,7 +16,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
+import { NgChartsModule } from 'ng2-charts';
 import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
@@ -39,7 +39,8 @@ import {MatCardModule} from '@angular/material/card';
     MatTooltipModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

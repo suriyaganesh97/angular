@@ -111,5 +111,7 @@
       }
     }
   },
-  "defaultProject": "Angular13Crud"
+  "cli": {
+    "analytics": false
+  }
 }

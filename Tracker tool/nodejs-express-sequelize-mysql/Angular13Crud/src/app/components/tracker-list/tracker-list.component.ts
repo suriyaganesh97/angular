@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewChecked,AfterContentInit } from '@angular/c
 import { Tracker } from 'src/app/models/tracker.model';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
   selector: 'app-tracker-list',
@@ -48,7 +48,7 @@ export class TrackerListComponent implements OnInit,AfterViewChecked,AfterConten
     // solutiontype: ['']
   })
   constructor(private trackerService: TrackerService,
-    private router: Router,public fb: FormBuilder) { }
+    private router: Router,public fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     // this.retrieveTrackers();

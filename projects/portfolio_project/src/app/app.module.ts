@@ -8,12 +8,19 @@ import { SkillLevelComponent } from './pagemodule/skill-level/skill-level.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
 import { ButtonsModule, WavesModule, IconsModule } from 'angular-bootstrap-md'
+import { Routes,RouterModule } from '@angular/router';
+import { HomepageComponent } from './pagemodule/homepage/homepage.component';
 
+const appRoutes: Routes = [
+  {path:'', component: HomepageComponent},
+  {path:'skill', component: SkillLevelComponent}
+];
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SkillLevelComponent
+    SkillLevelComponent,
+    HomepageComponent
     
   ],
   imports: [
@@ -23,7 +30,8 @@ import { ButtonsModule, WavesModule, IconsModule } from 'angular-bootstrap-md'
     MatMenuModule,
     ButtonsModule,
     WavesModule,
-    IconsModule
+    IconsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
